@@ -4,9 +4,9 @@ import java.awt.event.*;
 import java.util.*;
 /*************************************************************
  * GUI for a a text based game
- * 
- * @author Kevin Smith
- * @version 4/18/2017
+ *
+ * @author Kevin Smith, Haris Islamcevic, 
+ * @version 02/24/2019
  ************************************************************/
 public class GameGUI extends JFrame implements ActionListener{
 
@@ -37,7 +37,7 @@ public class GameGUI extends JFrame implements ActionListener{
 
     /*****************************************************************
      * Main Method
-     ****************************************************************/ 
+     ****************************************************************/
     public static void main(String args[]){
         GameGUI gui = new GameGUI();
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ public class GameGUI extends JFrame implements ActionListener{
 
     /*****************************************************************
      * constructor installs all of the GUI components
-     ****************************************************************/    
+     ****************************************************************/
     public GameGUI(){
         g = new Game();
 
@@ -69,7 +69,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,500); 
+        loc.insets =  new Insets(0,0,0,500);
         add(new JLabel("Actions: "), loc);
 
         loc = new GridBagConstraints();
@@ -83,7 +83,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,350); 
+        loc.insets =  new Insets(0,0,0,350);
         add(look, loc);
 
         pickup = new JButton();
@@ -91,14 +91,14 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,200); 
+        loc.insets =  new Insets(0,0,0,200);
         add(pickup, loc);
         drop = new JButton();
         drop.setText("Drop");
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,50); 
+        loc.insets =  new Insets(0,0,0,50);
         add(drop, loc);
 
         eat = new JButton();
@@ -106,7 +106,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,-75); 
+        loc.insets =  new Insets(0,0,0,-75);
         add(eat, loc);
 
         help = new JButton();
@@ -114,7 +114,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,-200); 
+        loc.insets =  new Insets(0,0,0,-200);
         add(help, loc);
 
         list = new JButton();
@@ -122,14 +122,14 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,-325); 
+        loc.insets =  new Insets(0,0,0,-325);
         add(list, loc);
         slide = new JButton();
         slide.setText("Swipe");
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,-465); 
+        loc.insets =  new Insets(0,0,0,-465);
         add(slide, loc);
 
         toss = new JButton();
@@ -137,7 +137,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 1;
-        loc.insets =  new Insets(0,0,0,-615); 
+        loc.insets =  new Insets(0,0,0,-615);
         add(toss, loc);
 
         north = new JButton();
@@ -160,7 +160,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc = new GridBagConstraints();
         loc.gridx = 1;
         loc.gridy = 0;
-        loc.insets =  new Insets(0,50,-50,0); 
+        loc.insets =  new Insets(0,50,-50,0);
         add(south, loc);
 
         east = new JButton();
@@ -171,7 +171,7 @@ public class GameGUI extends JFrame implements ActionListener{
         loc.insets =  new Insets(0,50,-125,0);
         add(east, loc);
 
-        // FIX ME: register the button action listeners 
+        // FIX ME: register the button action listeners
         north.addActionListener(this);
         south.addActionListener(this);
         east.addActionListener(this);
@@ -203,9 +203,9 @@ public class GameGUI extends JFrame implements ActionListener{
     /*****************************************************************
      * This method is called when any button is clicked.  The proper
      * internal method is called as needed.
-     * 
+     *
      * @param e the event that was fired
-     ****************************************************************/       
+     ****************************************************************/
     public void actionPerformed(ActionEvent e){
         // menu item - quit
         if (e.getSource() == quitItem){
@@ -257,7 +257,7 @@ public class GameGUI extends JFrame implements ActionListener{
             g.move("south");
             String msg = g.getMessage();
             results.append("\n" + msg);
-        }    
+        }
         else if (e.getSource() == toss){
             String toToss = JOptionPane.showInputDialog(null, "Throw what?");
             g.toss(toToss);

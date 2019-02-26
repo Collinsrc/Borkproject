@@ -2,14 +2,14 @@ import java.util.HashMap;
 import java.util.ArrayList;
 /**
  * Write a description of class location here.
- * 
- * @author Kevin Smith
- * @version 4/18/2017
+ *
+ * @author Kevin Smith, Haris Islamcevic
+ * @version 02/24/2019
  */
 public class Location
 {
     /** Instance variable for name */
-    private String description; 
+    private String description;
 
     /** Instance variable for item */
     private Item item;
@@ -91,7 +91,7 @@ public class Location
     }
 
     /**
-     * Method to get the neighbor 
+     * Method to get the neighbor
      * @param pDirection
      */
     public Location getNeighbor(String pDirection){
@@ -113,7 +113,7 @@ public class Location
      */
     public String getLongDescription(){
         if(hasItem() == true ){
-            return ("You are in the " + description + " room," + " You see  " + item.getName()); 
+            return ("You are in the " + description + " room," + " You see  " + item.getName());
         }
         return ("You are in the " + description + " room.");
     }

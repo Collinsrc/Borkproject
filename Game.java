@@ -1,31 +1,31 @@
 import java.util.ArrayList;
 /**
  * Write a description of class Game here.
- * 
- * @author Kevin Smith
- * @version 4/17/2017
+ *
+ * @author Kevin Smith, Haris Islamcevic,
+ * @version 02/24/2019
  */
 public class Game
-{   
+{
     /**Instance variables to declare locations  */
-    private Location cmdCenter;
-    private Location cafe;
+    private Location jailCell;
+    private Location messhall;
     private Location storage;
     private Location armory;
-    private Location comms;
-    private Location medical;
-    private Location airlock;
-    private Location bay;
+    private Location study;
+    private Location laboratory;
+    private Location doorway;
+    private Location summoningRoom;
 
     /**Instance variables to declare items  */
-    private Item flashlight;
-    private Item odorSpray;
-    private Item radar;
+    private Item lantern;
+    private Item moldyFood;
+    private Item sigil;
     private Item rock;
-    private Item lmg;
-    private Item keycard;
-    private Item suit;
-    private Item ship;
+    private Item excalibur;
+    private Item key;
+    private Item portalStone;
+    private Item portal;
 
     /**Instance variable for ArrayList of object Item  */
     private ArrayList<Item> itemsHeld;
@@ -46,7 +46,7 @@ public class Game
     public Game(){
         itemsHeld = new ArrayList<Item>();
         createWorld();
-        currentLocation = cmdCenter;
+        currentLocation = jailCell;
         setWelcomeMessage();
     }
 
@@ -63,45 +63,46 @@ public class Game
      */
     private void createWorld(){
 
-        cmdCenter = new Location("Command center");
-        odorSpray = new Item("Odor spray", "odor spray", 3, false);
-        cafe = new Location("Cafeteria", odorSpray);
-        radar = new Item("Radar", "a radar", 8, false);
-        comms = new Location("Comms", radar);
-        rock = new Item("Moon rock", "a moon rock", 10, false);
+        moldyFood = new Item("Moldy Food", "moldy food left by a patron", 3, false, false, 0, 0);
+        sigil = new Item("Sigil", "a sigil", 8, false, false, 0, 0);
+        rock = new Item("Rock", "a normal looking rock", 10, false, true, 1, 2);
+        excalibur = new Item("Excalibur", "a sword said to crown whomever can lift it from it's rock as King", 100, false, true, 100, 100);
+        key = new Item("Key", "a key", 1, false, false, 0, 0);
+        portalStone = new Item("Portal Stone", "a stone used by sorcerers, and wizards to open portals", 15, false, false, 0, 0);
+        portal = new Item("Portal", "a summoning circle used to open up a portal... Something is missing...", 49, false, false, 0, 0);
+
+        jailCell = new Location("Jail cell");
+        messhall = new Location("Messhall", moldyFood);
+        study = new Location("Study", sigil);
         storage = new Location("Storage", rock);
-        lmg = new Item("Lmg", "a light machine gun", 80, false);
-        armory = new Location("Armory", lmg);
-        keycard = new Item("Keycard", "a keycard", 1, false);
-        medical = new Location("Medical Facility", keycard);
-        suit = new Item("Space suit", "a space suit", 40, false);
-        airlock = new Location("Airlock", suit);
-        ship = new Item("Spaceship", "a y-wing spaceship", 49, false);
-        bay = new Location("Spaceship Bay", ship);
+        armory = new Location("Armory", sword);
+        laboratory = new Location("An evil scientist's laboratory", key);
+        doorway = new Location("Doorway", portalStone);
+        summoningRoom = new Location("Summoning Room", portal);
 
         storage.addNeighbor("north", armory);
-        storage.addNeighbor("south",cmdCenter);
+        storage.addNeighbor("south",jailCell);
         armory.addNeighbor("south", storage);
-        cmdCenter.addNeighbor("north",storage);
-        cmdCenter.addNeighbor("south",airlock);
-        cmdCenter.addNeighbor("west",comms);
-        cmdCenter.addNeighbor("east",cafe);
-        airlock.addNeighbor("north",cmdCenter);
-        airlock.addNeighbor("south",bay);
-        bay.addNeighbor("north",airlock);
-        cafe.addNeighbor("west",cmdCenter);
-        medical.addNeighbor("east",comms);
-        comms.addNeighbor("west",medical);
-        comms.addNeighbor("east",cmdCenter);
+        jailCell.addNeighbor("north",storage);
+        jailCell.addNeighbor("south",doorway);
+        jailCell.addNeighbor("west",study);
+        jailCell.addNeighbor("east",messhall);
+        doorway.addNeighbor("north",jailCell);
+        doorway.addNeighbor("south",summoningRoom);
+        summoningRoom.addNeighbor("north",doorway);
+        messhall.addNeighbor("west",jailCell);
+        laboratory.addNeighbor("east",study);
+        study.addNeighbor("west",laboratory);
+        study.addNeighbor("east",jailCell);
     }
 
     /**
      * Method that sets a welcome message
      */
     public void setWelcomeMessage(){
-        message = "Welcome to Seclusion. This is a game where you must find your way off of the space \n"
-        + "station by reaching the spaceship bay whilst avoiding the Xenomorph on board. Be warned,\n"
-        + "use any objects to your advantage. However, some things may seem to good to be true...";
+        message = "Welcome to Bork. This is a text adventure game with similar elements to the popular game Zork. \n"
+        + "try to escape, but, be warned, you must avoiding the at all costs Beholder.\n"
+        + "Use anything you can to your advantage. Just understand that some things may be too good to be true...";
     }
 
     /**
@@ -119,17 +120,17 @@ public class Game
     /**
      * Method that gives helpful hints to the player
      */
-    public void help(){ 
+    public void help(){
         if(count == 0){
-            message = "The objective is to find the keycard to open the Airlocks.";
+            message = "The objective is to find the key to open the doorway.";
             count++;
         }
         else if(count == 1){
-            message = "An item might be in the Medical Facility.";
+            message = "An item might be in the laboratory.";
             count++;
         }
         else if(count == 2){
-            message = "keep the keycard till you go to the Command Center";
+            message = "keep the key untill you go to the Jail Cell";
             count++;
         }else if(count == 3){
             message = "Sorry, no more hints...";
@@ -152,19 +153,19 @@ public class Game
         if (nextSpot == null){
             message = "You can't move in that direction";
         }
-        else if(nextSpot == comms && count2 == 0){
-            message = "The alien is blocking a doorway, if only there was a way to distract it...";
+        else if(nextSpot == study && count2 == 0){
+            message = "The beholder is blocking the entrance, if only there was a way to distract it...";
         }
-        else if (nextSpot == airlock && count3 == 0){
-            message = "Swipe your keycard to enter";
+        else if (nextSpot == doorway && count3 == 0){
+            message = "Insert the key to enter";
         }
-        else if(nextSpot == bay && !itemsHeld.contains(suit)){
+        else if(nextSpot == summoningRoom && !itemsHeld.contains(portalStone)){
             gameOver();
         }
         else {
             currentLocation = nextSpot;
             message = currentLocation.getLongDescription();
-        }     
+        }
 
     }
 
@@ -211,7 +212,7 @@ public class Game
 
             message = "You have dropped the " + item + " " + currentLocation.getDescription();
         }
-        else 
+        else
         if(currentLocation.hasItem() == true)
             message = "This room already has an item";
         else
@@ -247,13 +248,13 @@ public class Game
     }
 
     /**
-     * Method that allows the player to slide an object 
+     * Method that allows the player to slide an object
      */
     public void slide(String item){
-        if(itemsHeld.contains(keycard)){
-            if(currentLocation == cmdCenter){
-                message = "you swiped the keycard to open the airlocks";
-                itemsHeld.remove(keycard);
+        if(itemsHeld.contains(key)){
+            if(currentLocation == jailCell){
+                message = "you unlocked the doorway with the key";
+                itemsHeld.remove(key);
                 count3 = 1;
             }
         }
@@ -263,8 +264,8 @@ public class Game
      * Method that tells the player if they won or lost
      */
     public boolean gameOver(){
-        if(currentLocation == bay && itemsHeld.contains(suit)){
-            message = "You successfully escaped the Xenomorph, you win!";
+        if(currentLocation == summoningRoom && itemsHeld.contains(portalStone)){
+            message = "You successfully escaped the Dungeon, you win!";
             return true;
         }
         return false;

@@ -1,8 +1,9 @@
+package BORK;
 import java.util.ArrayList;
 /**
  * Write a description of class Game here.
  *
- * @author Kevin Smith, Haris Islamcevic,
+ * @author Kevin Smith, Haris Islamcevic, Robert Collins
  * @version 02/24/2019
  */
 public class Game
@@ -75,7 +76,7 @@ public class Game
         messhall = new Location("Messhall", moldyFood);
         study = new Location("Study", sigil);
         storage = new Location("Storage", rock);
-        armory = new Location("Armory", sword);
+        armory = new Location("Armory", excalibur);
         laboratory = new Location("An evil scientist's laboratory", key);
         doorway = new Location("Doorway", portalStone);
         summoningRoom = new Location("Summoning Room", portal);

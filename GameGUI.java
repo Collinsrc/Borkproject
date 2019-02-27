@@ -1,3 +1,4 @@
+package BORK;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -5,7 +6,7 @@ import java.util.*;
 /*************************************************************
  * GUI for a a text based game
  *
- * @author Kevin Smith, Haris Islamcevic, 
+ * @author Kevin Smith, Haris Islamcevic, Robert Collins
  * @version 02/24/2019
  ************************************************************/
 public class GameGUI extends JFrame implements ActionListener{

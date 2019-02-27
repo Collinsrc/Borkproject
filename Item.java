@@ -1,8 +1,8 @@
-
+package BORK;
 /**
  * Write a description of class Item here.
  *
- * @author Kevin Smith, Haris Islamcevic,
+ * @author Kevin Smith, Haris Islamcevic, Robert Collins
  * @version 02/24/2019
  */
 public class Item
@@ -52,7 +52,8 @@ public class Item
         weight = w;
         edible = e;
         isWeapon = wpn;
-        damage = dmg;
+        minimumDamage = minD;
+        maximumDamage = maxD;
     }
 
     /**
@@ -147,7 +148,7 @@ public class Item
       * Method to set a weapon's minimum damage.
       * @param minimumDamage
       */
-     public void setWeight(int damage) {
+     public void setMinDamage(int damage) {
          this.minimumDamage = damage;
      }
 
@@ -155,7 +156,7 @@ public class Item
       * Method to set a weapon's maximum damage.
       * @param maximumDamage
       */
-     public void setWeight(int damage) {
+     public void setMaxDamage(int damage) {
          this.maximumDamage = damage;
      }
 }

@@ -22,11 +22,8 @@ public class Item
     /** Instance variable for weapon */
     boolean isWeapon;
 
-    /** Instance variable for minimum damage the weapon can do */
-    int minimumDamage;
-
-    /** Instance variable for maximum damage the weapon can do */
-    int maximumDamage;
+    /** Instance variable for the damage the weapon can do */
+    int damage;
 
     /**
      * Constructor for objects of class Item
@@ -38,15 +35,14 @@ public class Item
         weight = 0;
         edible = false;
         isWeapon = false;
-        minimumDamage = 0;
-        maximumDamage = 0;
+        damage = 0;
     }
 
     /**
      * Constructor for objects of class Item
      * @param n,d,w,e
      */
-    public Item(String n, String d, int w, boolean e, boolean wpn, int minD, int maxD){
+    public Item(String n, String d, int w, boolean e, boolean wpn, int dmg){
         name = n;
         description = d;
         weight = w;
@@ -128,34 +124,19 @@ public class Item
     }
 
     /**
-     * Method to get a weapon's minimum damage.
+     * Method to get a weapon's damage.
      * return weight
      */
-     public int getMinimumDamage() {
-         return minimumDamage;
+     public int getDamage() {
+         return damage;
      }
 
      /**
-      * Method to get a weapon's maxiumum damage.
-      * return weight
+      * Method to set a weapon's damage.
+      * @param damage
       */
-     public int getMaximumDamage() {
-         return maximumDamage;
+     public void setDamage(int damage) {
+         this.damage = damage;
      }
 
-     /**
-      * Method to set a weapon's minimum damage.
-      * @param minimumDamage
-      */
-     public void setWeight(int damage) {
-         this.minimumDamage = damage;
-     }
-
-     /**
-      * Method to set a weapon's maximum damage.
-      * @param maximumDamage
-      */
-     public void setWeight(int damage) {
-         this.maximumDamage = damage;
-     }
 }

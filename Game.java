@@ -26,12 +26,31 @@ public class Game
 
         /**Weapons */
     private Item excalibur;
-
-        /**Usefless */
-    private Item lantern;
+    private Item Mace;
+    private Item Longsword;
+    private Item Greataxe;
+    private Item Maul;
+    private Item Wand;
+    
+        /**Useless */
     private Item moldyFood;
     private Item sigil;
     private Item rock;
+    private Item gold;
+    private Item loot;
+    private Item Grail;
+    private Item characterSheet;
+    private Item lantern;
+    private Item torch;
+    private Item corpse;
+    private Item trash;
+    
+    /** Immovable items */
+    private Item rubble;
+    private Item table;
+    private Item statue;
+    private Item trap;
+    private Item largeChest;
 
 
     /**Instance variable for ArrayList of object Item */

@@ -48,8 +48,6 @@ public class Item
         weight = w;
         edible = e;
         isWeapon = wpn;
-        minimumDamage = minD;
-        maximumDamage = maxD;
     }
 
     /**

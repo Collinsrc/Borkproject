@@ -10,12 +10,13 @@ import java.util.*;
  * @author Kevin Smith, Haris Islamcevic, Robert Collins
  * @version 02/24/2019 **********************************************************
  */
+
 public class GameGUI extends JFrame implements ActionListener {
 
-  /** Instance variable that declares Game */
+  /** Instance variable that declares Game. */
   Game g;
 
-  /** JButtons */
+  /** JButtons. */
   private JButton east;
 
   private JButton west;
@@ -31,17 +32,16 @@ public class GameGUI extends JFrame implements ActionListener {
   private JButton toss;
   private JButton showMinimap;
 
-  /** Displays results in this text area */
+  /** Displays results in this text area. */
   JTextArea results;
 
-  /** menu items */
+  /** menu items. */
   JMenuBar menus;
 
   JMenu fileMenu;
   JMenuItem quitItem;
 
-  /**
-   * *************************************************************** Main Method
+  /****************************************** Main Method.
    * **************************************************************
    */
   public static void main(String args[]) {
@@ -53,9 +53,7 @@ public class GameGUI extends JFrame implements ActionListener {
     gui.setVisible(true);
   }
 
-  /**
-   * *************************************************************** constructor installs all of the
-   * GUI components **************************************************************
+  /**constructor installs all of the GUI components.
    */
   public GameGUI() {
     g = new Game();
@@ -297,7 +295,7 @@ public class GameGUI extends JFrame implements ActionListener {
     }
   }
 
-  /** Method that disables all the buttons when the game is over */
+  /** Method that disables all the buttons when the game is over. */
   private void gameOver() {
     if (g.gameOver() == true) {
       look.setEnabled(false);
@@ -316,7 +314,7 @@ public class GameGUI extends JFrame implements ActionListener {
     }
   }
 
-  /** Method that creates a new game for the player */
+  /** Method that creates a new game for the player. */
   private void newGame() {
     g = new Game();
     look.setEnabled(true);

@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * @author Kevin Smith, Haris Islamcevic, Robert Collins
  * @version 02/24/2019
  */
+
 public class Game {
   /** Instance variables to declare locations. */
   private Location jailCell;
@@ -19,14 +20,14 @@ public class Game {
   private Location doorway;
   private Location summoningRoom;
 
-  /** Instance variables to declare items */
-  /** Useful */
+  /** Instance variables to declare items. */
+  /** Useful. */
   private Item key;
 
   private Item portal;
   private Item portalStone;
 
-  /** Weapons */
+  /** Weapons. */
   private Item excalibur;
 
   private Item Mace;
@@ -35,7 +36,7 @@ public class Game {
   private Item Maul;
   private Item Wand;
 
-  /** Useless */
+  /** Useless. */
   private Item moldyFood;
 
   private Item sigil;
@@ -49,7 +50,7 @@ public class Game {
   private Item corpse;
   private Item trash;
 
-  /** Immovable items */
+  /** Immovable items. */
   private Item rubble;
 
   private Item table;
@@ -57,20 +58,20 @@ public class Game {
   private Item trap;
   private Item largeChest;
 
-  /** Instance variable for ArrayList of object Item */
+  /** Instance variable for ArrayList of object Item. */
   private ArrayList<Item> itemsHeld;
 
-  /** Instance variable for currentLocation */
+  /** Instance variable for currentLocation. */
   private Location currentLocation;
 
-  /** Instance variable for a message */
+  /** Instance variable for a message. */
   private String message;
 
   private int count = 0;
   private int count2 = 0;
   private int count3 = 0;
 
-  /** Constructor for objects of class Game */
+  /** Constructor for objects of class Game. */
   public Game() {
     itemsHeld = new ArrayList<Item>();
     createWorld();
@@ -78,8 +79,7 @@ public class Game {
     setWelcomeMessage();
   }
 
-  /**
-   * Method to get the current message
+  /*** Method to get the current message.
    *
    * @return message
    */
@@ -87,9 +87,9 @@ public class Game {
     return message;
   }
 
-  /** Method that creates the world */
+  /** Method that creates the world. */
   private void createWorld() {
-    /** Useful Items */
+    /** Useful Items. */
     key = new Item("Key", "a key", 1, false, false, 0);
     portal =
         new Item(
@@ -116,7 +116,8 @@ public class Game {
     Greataxe =
         new Item(
             "Greataxe",
-            "You know that thing people use to cut down trees? It's that but bigger, and more... Hurty.",
+            "You know that thing people use to cut down "
+            + "trees? It's that but bigger, and more... Hurty.",
             20,
             false,
             true,
@@ -132,7 +133,8 @@ public class Game {
     Wand =
         new Item(
             "Wand of Fireball",
-            "Essentially a pocket wizard... If that wizard could only cast one spell... At leasts it's an iconic  spell!",
+            "Essentially a pocket wizard... If that wizard "
+            + "could only cast one spell... At leasts it's an iconic  spell!",
             1,
             false,
             true,
@@ -187,7 +189,8 @@ public class Game {
     statue =
         new Item(
             "Statue",
-            "a large statue affixed to a wall. It is humanoid in shape, but it's worn exterior makes it hard to depict whom it resembles",
+            "a large statue affixed to a wall. It is humanoid in shape,"
+            + " but it's worn exterior makes it hard to depict whom it resembles",
             100,
             false,
             false,
@@ -195,7 +198,8 @@ public class Game {
     trap =
         new Item(
             "Sprung Trap",
-            "This trap was likely sprung by another adventurer some time ago. You hope they're okay.",
+            "This trap was likely sprung by another "
+            + "adventurer some time ago. You hope they're okay.",
             100,
             false,
             false,
@@ -236,15 +240,17 @@ public class Game {
     study.addNeighbor("east", jailCell);
   }
 
-  /** Method that sets a welcome message */
+  /** Method that sets a welcome message. */
   public void setWelcomeMessage() {
     message =
-        "Welcome to Bork. This is a text adventure game with similar elements to the popular game Zork. \n"
+        "Welcome to Bork. This is a text adventure game with "
+        + "similar elements to the popular game Zork. \n"
             + "try to escape, but, be warned, you must avoiding the at all costs Beholder.\n"
-            + "Use anything you can to your advantage. Just understand that some things may be too good to be true...";
+            + "Use anything you can to your advantage. "
+            + "Just understand that some things may be too good to be true...";
   }
 
-  /** Method that checks for an item within our ArrayList */
+  /** Method that checks for an item within our ArrayList. */
   private Item checkForItem(String name) {
     for (Item i : itemsHeld) {
       if (i.getName() == name) {
@@ -254,7 +260,7 @@ public class Game {
     return null;
   }
 
-  /** Method that gives helpful hints to the player */
+  /** Method that gives helpful hints to the player. */
   public void help() {
     if (count == 0) {
       message = "The objective is to find the key to open the doorway.";
@@ -271,12 +277,12 @@ public class Game {
     }
   }
 
-  /** Method to say what the player sees in a room */
+  /** Method to say what the player sees in a room. */
   public void look() {
     message = currentLocation.getLongDescription();
   }
 
-  /** Method that allows the player to move in certain locations */
+  /** Method that allows the player to move in certain locations. */
   public void move(String pDir) {
     Location nextSpot = currentLocation.getNeighbor(pDir);
     if (nextSpot == null) {
@@ -293,7 +299,7 @@ public class Game {
     }
   }
 
-  /** Method that tells how many items are in our ArrayList */
+  /** Method that tells how many items are in our ArrayList. */
   public void list() {
     message = "You are holding: ";
     for (Item it : itemsHeld) {
@@ -302,7 +308,7 @@ public class Game {
     message = message + "\n" + "nothing";
   }
 
-  /** Method that allows the player to pickup objects */
+  /** Method that allows the player to pickup objects. */
   public void pickup() {
     if (currentLocation.hasItem() == true) {
       if (currentLocation.getItem().getWeight() < 50) {
@@ -317,7 +323,7 @@ public class Game {
     }
   }
 
-  /** Method that allows the player to drop objects in a room with no item */
+  /** Method that allows the player to drop objects in a room with no item. */
   public void drop(String item) {
     if (checkForItem(item) != null) {
       Item i = checkForItem(item);
@@ -332,7 +338,7 @@ public class Game {
     }
   }
 
-  /** Method that allows the player to eat an edible object */
+  /** Method that allows the player to eat an edible object. */
   public void eat(String item) {
     if (checkForItem(item) != null) {
       Item i = checkForItem(item);
@@ -341,20 +347,20 @@ public class Game {
         itemsHeld.remove(i);
       } else if (i.isEdible() == false) {
         message = "You can not eat " + i.getName();
-      } else if (i.getName() != item) {
+      } else if (i.getName().equals(item)) {
         message = "You are not holding that item";
       }
     }
   }
 
-  /** Method that allows the player to throw an object */
+  /** Method that allows the player to throw an object. */
   public void toss(String item) {
     count2 = 1;
     itemsHeld.remove(rock);
     message = "You threw the rock";
   }
 
-  /** Method that allows the player to slide an object */
+  /** Method that allows the player to slide an object. */
   public void slide(String item) {
     if (itemsHeld.contains(key)) {
       if (currentLocation == jailCell) {
@@ -365,7 +371,7 @@ public class Game {
     }
   }
 
-  /** Method that tells the player if they won or lost */
+  /** Method that tells the player if they won or lost. */
   public boolean gameOver() {
     if (currentLocation == summoningRoom && itemsHeld.contains(portalStone)) {
       message = "You successfully escaped the Dungeon, you win!";

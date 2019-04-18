@@ -2,20 +2,23 @@ package BORK;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 import java.awt.event.*;
 import java.util.*;
+
 /**
  * *********************************************************** GUI for a a text based game.
  *
  * @author Kevin Smith, Haris Islamcevic, Robert Collins, Brandon DeFore
  * @version 02/24/2019 **********************************************************
  */
+
 public class GameGUI extends JFrame implements ActionListener {
 
-  /** Instance variable that declares Game */
+  /** Instance variable that declares Game. */
   Game g;
 
-  /** JButtons */
+  /** JButtons. */
   private JButton east;
 
   private JButton west;
@@ -34,31 +37,31 @@ public class GameGUI extends JFrame implements ActionListener {
   private JButton attack;
   private JButton open;
 
-  /** Displays results in this text area */
+  /** Displays results in this text area. */
   JTextArea results;
 
-  /** menu items */
+  /** menu items. */
   JMenuBar menus;
 
   JMenu fileMenu;
   JMenuItem quitItem;
 
   /**
-   * *************************************************************** Main Method
+   * *************************************************************** Main Method.
    * **************************************************************
    */
   public static void main(String args[]) {
     GameGUI gui = new GameGUI();
     gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     gui.setTitle("BORK");
-    gui.setSize(200, 200);
+    gui.setPreferredSize(new Dimension(1000, 500));
     gui.pack();
     gui.setVisible(true);
   }
 
   /**
-   * *************************************************************** constructor installs all of the
-   * GUI components **************************************************************
+   * *************************************************************** constructor installs all of
+   * the. GUI components **************************************************************
    */
   public GameGUI() {
     g = new Game();
@@ -67,6 +70,8 @@ public class GameGUI extends JFrame implements ActionListener {
     GridBagConstraints loc;
 
     results = new JTextArea(20, 50);
+    DefaultCaret caret = (DefaultCaret)results.getCaret();
+    caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
     JScrollPane scrollPane = new JScrollPane(results);
     loc = new GridBagConstraints();
     loc.gridx = 0;
@@ -102,7 +107,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc.gridy = 1;
     loc.insets = new Insets(0, 0, 0, 170);
     add(pickup, loc);
-    
+
     drop = new JButton();
     drop.setText("Drop");
     loc = new GridBagConstraints();
@@ -110,7 +115,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc.gridy = 1;
     loc.insets = new Insets(0, 0, 0, -240);
     add(drop, loc);
-    
+
     pickup2 = new JButton();
     pickup2.setText("Pick up item 2");
     loc = new GridBagConstraints();
@@ -118,7 +123,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc.gridy = 1;
     loc.insets = new Insets(0, 0, 0, -60);
     add(pickup2, loc);
-    
+
     attack = new JButton();
     attack.setText("Attack");
     loc = new GridBagConstraints();
@@ -126,7 +131,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc.gridy = 1;
     loc.insets = new Insets(0, 0, -60, 350);
     add(attack, loc);
-    
+
     open = new JButton();
     open.setText("Open");
     loc = new GridBagConstraints();
@@ -134,7 +139,6 @@ public class GameGUI extends JFrame implements ActionListener {
     loc.gridy = 1;
     loc.insets = new Insets(0, 0, -60, 210);
     add(open, loc);
-    
 
     reset = new JButton();
     reset.setText("reset");
@@ -159,7 +163,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc.gridy = 1;
     loc.insets = new Insets(0, 0, -60, -30);
     add(list, loc);
-    
+
     slide = new JButton();
     slide.setText("Swipe");
     loc = new GridBagConstraints();
@@ -224,7 +228,7 @@ public class GameGUI extends JFrame implements ActionListener {
     pickup.addActionListener(this);
     pickup2.addActionListener(this);
     drop.addActionListener(this);
-    
+
     reset.addActionListener(this);
     look.addActionListener(this);
     list.addActionListener(this);
@@ -270,7 +274,7 @@ public class GameGUI extends JFrame implements ActionListener {
     } else if (e.getSource() == pickup) {
       g.pickup();
       String msg = g.getMessage();
-      results.append("\n" + msg); 
+      results.append("\n" + msg);
     } else if (e.getSource() == pickup2) {
       g.pickup2();
       String msg = g.getMessage();
@@ -278,7 +282,7 @@ public class GameGUI extends JFrame implements ActionListener {
     } else if (e.getSource() == attack) {
       g.attack();
       String msg = g.getMessage();
-      results.append("\n" + msg); 
+      results.append("\n" + msg);
     } else if (e.getSource() == drop) {
       String toDrop = JOptionPane.showInputDialog(null, "Drop what?");
       g.drop(toDrop);
@@ -342,7 +346,7 @@ public class GameGUI extends JFrame implements ActionListener {
     }
   }
 
-  /** Method that disables all the buttons when the game is over */
+  /** Method that disables all the buttons when the game is over. */
   private void gameOver() {
     if (g.gameOver() == true) {
       look.setEnabled(false);
@@ -361,7 +365,7 @@ public class GameGUI extends JFrame implements ActionListener {
     }
   }
 
-  /** Method that crresetes a new game for the player */
+  /** Method that creates a new game for the player. */
   private void newGame() {
     g = new Game();
     look.setEnabled(true);

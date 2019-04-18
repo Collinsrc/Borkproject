@@ -1,4 +1,4 @@
-package BORK;
+package Bork;
 
 import java.awt.*;
 import javax.swing.*;
@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * *********************************************************** GUI for a a text based game.
  *
- * @author Kevin Smith, Haris Islamcevic, Robert Collins
+ * @author Kevin Smith, Haris Islamcevic, Robert Collins, Brandon DeFore
  * @version 02/24/2019 **********************************************************
  */
 public class GameGUI extends JFrame implements ActionListener {
@@ -25,7 +25,7 @@ public class GameGUI extends JFrame implements ActionListener {
   private JButton pickup;
   private JButton pickup2;
   private JButton drop;
-  private JButton eat;
+  private JButton reset;
   private JButton look;
   private JButton list;
   private JButton slide;
@@ -96,11 +96,11 @@ public class GameGUI extends JFrame implements ActionListener {
     add(look, loc);
 
     pickup = new JButton();
-    pickup.setText("Pick up");
+    pickup.setText("Pick up item 1");
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, 200);
+    loc.insets = new Insets(0, 0, 0, 170);
     add(pickup, loc);
     
     drop = new JButton();
@@ -108,15 +108,15 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, 50);
+    loc.insets = new Insets(0, 0, 0, -240);
     add(drop, loc);
     
     pickup2 = new JButton();
-    pickup2.setText("Pick up 2nd item");
+    pickup2.setText("Pick up item 2");
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, -200, 200);
+    loc.insets = new Insets(0, 0, 0, -60);
     add(pickup2, loc);
     
     attack = new JButton();
@@ -124,7 +124,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, -200, 500);
+    loc.insets = new Insets(0, 0, -60, 350);
     add(attack, loc);
     
     open = new JButton();
@@ -132,24 +132,24 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, -200, -500);
+    loc.insets = new Insets(0, 0, -60, 210);
     add(open, loc);
     
 
-    eat = new JButton();
-    eat.setText("Eat");
+    reset = new JButton();
+    reset.setText("reset");
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, -75);
-    add(eat, loc);
+    loc.insets = new Insets(0, 0, -60, -152);
+    add(reset, loc);
 
     help = new JButton();
     help.setText("help");
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, -200);
+    loc.insets = new Insets(0, 0, -60, 85);
     add(help, loc);
 
     list = new JButton();
@@ -157,7 +157,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, -325);
+    loc.insets = new Insets(0, 0, -60, -30);
     add(list, loc);
     
     slide = new JButton();
@@ -165,7 +165,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, -465);
+    loc.insets = new Insets(0, 0, 0, -372);
     add(slide, loc);
 
     toss = new JButton();
@@ -173,7 +173,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 0;
     loc.gridy = 1;
-    loc.insets = new Insets(0, 0, 0, -615);
+    loc.insets = new Insets(0, 0, 0, -512);
     add(toss, loc);
 
     north = new JButton();
@@ -189,7 +189,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 1;
     loc.gridy = 0;
-    loc.insets = new Insets(0, 50, 25, 0);
+    loc.insets = new Insets(0, -100, 25, 0);
     add(west, loc);
     south = new JButton();
     south.setText("South");
@@ -204,7 +204,7 @@ public class GameGUI extends JFrame implements ActionListener {
     loc = new GridBagConstraints();
     loc.gridx = 1;
     loc.gridy = 0;
-    loc.insets = new Insets(0, 50, -125, 0);
+    loc.insets = new Insets(0, 200, 25, 0);
     add(east, loc);
 
     showMinimap = new JButton();
@@ -224,7 +224,8 @@ public class GameGUI extends JFrame implements ActionListener {
     pickup.addActionListener(this);
     pickup2.addActionListener(this);
     drop.addActionListener(this);
-    eat.addActionListener(this);
+    
+    reset.addActionListener(this);
     look.addActionListener(this);
     list.addActionListener(this);
     slide.addActionListener(this);
@@ -283,9 +284,8 @@ public class GameGUI extends JFrame implements ActionListener {
       g.drop(toDrop);
       String msg = g.getMessage();
       results.append("\n" + msg);
-    } else if (e.getSource() == eat) {
-      String toEat = JOptionPane.showInputDialog(null, "Eat what?");
-      g.eat(toEat);
+    } else if (e.getSource() == reset) {
+      g.reset();
       String msg = g.getMessage();
       results.append("\n" + msg);
     } else if (e.getSource() == list) {
@@ -348,7 +348,7 @@ public class GameGUI extends JFrame implements ActionListener {
       look.setEnabled(false);
       pickup.setEnabled(false);
       drop.setEnabled(false);
-      eat.setEnabled(false);
+      reset.setEnabled(false);
       list.setEnabled(false);
       help.setEnabled(false);
       slide.setEnabled(false);
@@ -361,13 +361,13 @@ public class GameGUI extends JFrame implements ActionListener {
     }
   }
 
-  /** Method that creates a new game for the player */
+  /** Method that crresetes a new game for the player */
   private void newGame() {
     g = new Game();
     look.setEnabled(true);
     pickup.setEnabled(true);
     drop.setEnabled(true);
-    eat.setEnabled(true);
+    reset.setEnabled(true);
     list.setEnabled(true);
     help.setEnabled(true);
     slide.setEnabled(true);

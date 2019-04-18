@@ -49,7 +49,7 @@ public class Game {
 
   private Item sigil;
   private Item rock;
-  private Item gold;
+  private Item gold; 
   private Item loot;
   private Item Grail;
   private Item characterSheet;
@@ -57,6 +57,9 @@ public class Game {
   private Item torch;
   private Item corpse;
   private Item trash;
+  private Item no_item;
+  private Item no_item2;
+  
 
   /** Immovable items */
   private Item rubble;
@@ -169,6 +172,9 @@ public class Game {
             100);
 
     /** Useless Items */
+    
+    no_item = new Item("nothing","There are no items here",5, false,false,0);
+    no_item2 = new Item("nothing","There is no second item here",5,false,false,0);
     gold = new Item("Gold Pouch", "a leather pouch conpaining 25 gold pieces", 5, false, false, 0);
     loot =
         new Item(
@@ -258,22 +264,21 @@ public class Game {
     		new Enemy(
     				"No enemy",
     				"no enemy here",
-    				0);
+    				1);
     
     /** Item Locations */
     jailCell = new Location("Jail cell", Makeshift_shiv,corpse,no_enemy);
-    messhall = new Location("Messhall", torch,moldyFood ,no_enemy);
-    study = new Location("Study", sigil,trash,no_enemy);
-    storage = new Location("Storage", rock,statue, no_enemy);
+    messhall = new Location("Messhall", table ,moldyFood ,no_enemy);
+    study = new Location("Study", sigil,lantern,no_enemy);
+    storage = new Location("Storage", statue, rock, no_enemy);
     armory = new Location("Armory", corpse, excalibur ,no_enemy);
     laboratory = new Location("An evil scientist's laboratory", keycard ,lantern, mad_scientist);
     doorway = new Location("Doorway", portalStone,statue,no_enemy);
     summoningRoom = new Location("Summoning Room", portal,Grail,final_bossman);
     lair = new Location("Lair",Longsword, torch ,dire_wolf);
     wardens = new Location("Warden's office", largeChest,trap,no_enemy);
-    exit = new Location("Dungeon Exit");
     caves = new Location("Dark Caves", Greataxe , rubble , cave_troll);
-    secret_room = new Location("A secret room", Maul,largeChest ,no_enemy);
+    secret_room = new Location("A secret room", Wand,largeChest ,no_enemy);
     
     
 
@@ -292,8 +297,6 @@ public class Game {
     doorway.addNeighbor("east", wardens);
     wardens.addNeighbor("west", doorway);
     summoningRoom.addNeighbor("north", doorway);
-    summoningRoom.addNeighbor("south", exit);
-    exit.addNeighbor("north", summoningRoom);
     messhall.addNeighbor("west", jailCell);
     messhall.addNeighbor("north", caves);
     caves.addNeighbor("south", messhall);
@@ -308,9 +311,13 @@ public class Game {
   /** Method that sets a welcome message */
   public void setWelcomeMessage() {
     message =
-        "Welcome to Bork. This is a text adventure game with similar elements to the popular game Zork. \n"
-            + "try to escape, but, be warned, you must avoiding the at all costs Beholder.\n"
-            + "Use anything you can to your advantage. Just understand that some things may be too good to be true...";
+        "Welcome to Bork. This is a text adventure game with similar elements to the game Zork\n"
+            + "Try to escape with the holy grail, but, be warned. There are monsters lurking everywhere\n"
+            + "Use anything you can to your advantage.";
+  }
+  
+  public void setResetMessage() {
+	  message = "Good luck this time around";
   }
 
   /** Method that checks for an item within our ArrayList */
@@ -326,18 +333,20 @@ public class Game {
   /** Method that gives helpful hints to the player */
   public void help() {
     if (count == 0) {
-      message = "The objective is to find the key to open the doorway.";
+      message = "The objective is to find the holy grail and escape";
       count++;
     } else if (count == 1) {
-      message = "An item might be in the laboratory.";
+      message = "Only certain weapons kill certain monsters";
       count++;
     } else if (count == 2) {
-      message = "keep the key untill you go to the Jail Cell";
+      message = "The key to enter doorway is somewhere to the west";
       count++;
     } else if (count == 3) {
-      message = "Sorry, no more hints...";
+      message = "There might be a way to get excalibur in the warden's office";
       count++;
     }
+    else
+    	message = "no more hints for you";
   }
 
   /** Method to say what the player sees in a room */
@@ -346,7 +355,7 @@ public class Game {
 		  message = currentLocation.getLongDescription();
 	  }
 	  else
-      message = "There is nothing left in this room";
+      message = currentLocation.getLongDescription();
   }
 
   /** Method that allows the player to move in certain locations */
@@ -383,6 +392,7 @@ public class Game {
         itemsHeld.add(currentLocation.getItem());
         message = "You picked up " + currentLocation.getItem().getName();
         currentLocation.removeItem();
+        currentLocation.addItem(no_item);
       } else {
         message = "The item is too heavy to carry";
       }
@@ -397,10 +407,12 @@ public class Game {
 	        itemsHeld.add(currentLocation.getItem2());
 	        message = "You picked up " + currentLocation.getItem2().getName();
 	        currentLocation.removeItem2();
+	        currentLocation.addItem2(no_item);
 	      } 
 	      else if(currentLocation.getItem2() == excalibur && itemsHeld.contains(Crown)) {
 	        message = "You have proved yourself worthy of the sword";
 	        itemsHeld.add(excalibur);
+	        currentLocation.addItem2(no_item);
 	      }
 		  else if(currentLocation.getItem2() == excalibur && itemsHeld.contains(Crown) == false) {
 			        message = "You Need to prove yourself worthy of the sword";
@@ -439,13 +451,14 @@ public class Game {
 			   if(itemsHeld.contains(Longsword) || itemsHeld.contains(Makeshift_shiv)) {
 				   message = "you killed the Dire wolf and received the Chest Key";
 				   itemsHeld.add(chestKey1);
-				   currentLocation.removeItem2();
-				   currentLocation.removeEnemy();	   
+				   currentLocation.removeEnemy();
+				   currentLocation.addEnemy(no_enemy);
 			   }
 			   else {
 				   currentLocation = jailCell;
-				   message ="you were killed by the Dire wolf";
 				   lives = lives - 1;
+				   message ="you were killed by the Dire wolf, maybe try the shiv\nYou have " + lives + " lives left ";
+
 			   }
 				   
 		   }
@@ -453,27 +466,27 @@ public class Game {
 			   if(itemsHeld.contains(Longsword) || itemsHeld.contains(Greataxe)) {
 				   message = "you killed the Cave Troll and received the second chest key";
 				   itemsHeld.add(chestKey2);
-				   itemsHeld.add(Greataxe);
-				   currentLocation.removeItem2();
 				   currentLocation.removeEnemy();
+				   currentLocation.addEnemy(no_enemy);
 			   }
 			   else {
 				   currentLocation = jailCell;
-				   message = "you were killed by the Cave Troll";
 				   lives--;
+				   message = "you were killed by the Cave Troll, if only you had a longsword\nYou have " + lives + " lives left ";
+				   
 			   }
 		   }
 		   else if(currentLocation.hasEnemy() == true && currentLocation == laboratory) {
-			   if(itemsHeld.contains(Maul) || itemsHeld.contains(Greataxe)) {
+			   if(itemsHeld.contains(Wand) || itemsHeld.contains(Greataxe)) {
 				   message = "you killed the Mad Scientist and looted the third chest key";
 				   itemsHeld.add(chestKey3);
-				   currentLocation.removeItem2();
 				   currentLocation.removeEnemy();
+				   currentLocation.addEnemy(no_enemy);
 			   }
 			   else {
 				   currentLocation = jailCell;
-				   message = "you were killed by the The Mad Scientist";
 				   lives--;
+				   message = "you were killed by the The Mad Scientist, if only you had a wand\nYou have " + lives + " lives left ";
 			   }
 		   }
 		   else if(currentLocation.hasEnemy() == true && currentLocation == summoningRoom) {
@@ -484,15 +497,15 @@ public class Game {
 			   }
 			   else {
 				   currentLocation = jailCell;
-				   message = "you were killed by the Fire Titan, you need the sword of Kings";
-				   lives--;  
+				   lives--;
+				   message = "you were killed by the Fire Titan, you need the sword of Kings\nYou have " + lives + " lives left ";  
 			   }
 		   }
 		   else
 			   message = "there is nothing to attack";
 	  
 	  if(lives == 0) {
-		  message = "GAME OVER, you are out of lives";
+		  message = "GAME OVER, you are out of lives press reset to start a new game";
 	  }
 	  }
   
@@ -502,11 +515,12 @@ public class Game {
     if (checkForItem(item) != null) {
       Item i = checkForItem(item);
       itemsHeld.remove(i);
-      currentLocation.addItem(i);
-
+      currentLocation.removeItem();
       message = "You have dropped the " + item + " " + currentLocation.getDescription();
     } else if (currentLocation.hasItem() == true) {
-      message = "This room already has an item";
+      message = "You have dropped the " + item + " in the " + currentLocation.getDescription();
+      currentLocation.removeItem();
+      currentLocation.addItem(Makeshift_shiv);
     } else {
       message = "the player is not holding that item";
     }
@@ -557,4 +571,12 @@ public class Game {
     }
     return false;
   }
+
+
+	public void reset()  {
+		itemsHeld = new ArrayList<Item>();
+		createWorld();
+		currentLocation = jailCell;
+		setResetMessage();
+	}
 }

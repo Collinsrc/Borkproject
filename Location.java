@@ -1,4 +1,4 @@
-package BORK;
+package Bork ;
 
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -96,6 +96,12 @@ public class Location {
     mapItems.add(currentItem);
   }
   
+  public void addItem2(Item pItem2) {
+	    item2 = pItem2;
+	    currentItem2 = pItem2;
+	    mapItems.add(currentItem2);
+	  }
+  
   public void addEnemy(Enemy pEnemy) {
 	  enemy = pEnemy;
 	  currentEnemy = pEnemy;
@@ -180,11 +186,8 @@ public class Location {
 //}
   
   public String getLongDescription() {
-	  if(hasItem() == true && hasItem2() == true && hasEnemy() == true) {
-		  return("You are in the " + description + " room, " + " you see a " +item.getName() + " ,a  " + item2.getName() +  " ,and " + enemy.getName());
-	  }
-	  else
-		  return("You are in the " + description);
+
+		  return("You are in the " + description + " , " + " you see: item 1: " +item.getName() + " , " + "item 2: " +item2.getName() +  " , Enemy: " + enemy.getName());
 	  
   }
 }

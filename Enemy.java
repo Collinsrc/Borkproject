@@ -1,4 +1,4 @@
-package Bork;
+package BORK;
 
 import java.awt.*;
 import javax.swing.*;

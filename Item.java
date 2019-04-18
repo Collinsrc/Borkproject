@@ -5,27 +5,26 @@ package BORK;
  * @author Kevin Smith, Haris Islamcevic, Robert Collins
  * @version 02/24/2019
  */
-
 public class Item {
-  /** Instance variable for name. */
+  /** Instance variable for name */
   String name;
 
-  /** Instance variable for description. */
+  /** Instance variable for description */
   String description;
 
-  /** Instance variable for weight. */
+  /** Instance variable for weight */
   int weight;
 
-  /** Instance variable for edible. */
+  /** Instance variable for edible */
   boolean edible;
 
-  /** Instance variable for weapon. */
+  /** Instance variable for weapon */
   boolean isWeapon;
 
-  /** Instance variable for the damage the weapon can do. */
+  /** Instance variable for the damage the weapon can do */
   int damage;
 
-  /** Constructor for objects of class Item. */
+  /** Constructor for objects of class Item */
   public Item() {
     name = "";
     description = "";
@@ -36,12 +35,9 @@ public class Item {
   }
 
   /**
-   * Constructor for objects of class Item.
+   * Constructor for objects of class Item
    *
-   * @param n name.
-   * @param d description.
-   * @param w weight.
-   * @param e edible.
+   * @param n,d,w,e
    */
   public Item(String n, String d, int w, boolean e, boolean wpn, int dmg) {
     name = n;
@@ -63,7 +59,7 @@ public class Item {
   /**
    * Method to set the name.
    *
-   * @param name name of item.
+   * @param name
    */
   public void setName(String name) {
     this.name = name;
@@ -77,7 +73,7 @@ public class Item {
   /**
    * Method to set the description.
    *
-   * @param description description of item.
+   * @param description
    */
   public void setDescription(String description) {
     this.description = description;
@@ -91,7 +87,7 @@ public class Item {
   /**
    * Method to set the weight.
    *
-   * @param weight weight of item.
+   * @param weight
    */
   public void setWeight(int weight) {
     this.weight = weight;
@@ -100,7 +96,7 @@ public class Item {
   /**
    * Method to set if the item is edible or not.
    *
-   * @param edible is edible or not.
+   * @param edible
    */
   public void setEdible(boolean edible) {
     this.edible = edible;
@@ -124,7 +120,7 @@ public class Item {
   /**
    * Method to set a weapon's damage.
    *
-   * @param damage damage.
+   * @param damage
    */
   public void setDamage(int damage) {
     this.damage = damage;

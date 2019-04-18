@@ -2,13 +2,10 @@ package BORK;
 /**
  * Write a description of class GameTest here.
  *
- * @author Robert Collins
- * @version 1
+ * @author (your name)
+ * @version (a version number or a date)
  */
-
 public class GameTest {
-
-  /** Main game test. */
   public static void main(String args[]) {
     Game g = new Game();
     System.out.println(g.getMessage());

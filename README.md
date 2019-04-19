@@ -1,11 +1,13 @@
 BORK: A Text Based Adventure Game<br/>
-Bork is a text based role playing game that allows a user to create a character
-and level up through a progression system while interacting with various NPC's
-(good and bad). The player shall be able to enter dungeons and fight enemies 
-whilst gaining experience and rewards to which they can then return to their
-'home base' to talk to a vendor to buy items and better prepare themselves for
-the next challenge.<br/>
-Dungeons are randomly generated based on the players stats/level with enemies 
-also scaling to be able to compete with the player.
+Bork is a classic Role-Playing game emanating the essence of Dungeons and Dragons 
+with a hint of the “Zork” play-style by incorporating text adventure aspects with 
+a few GUI elements to introduce a blend of gameplay mechanics we believe will be 
+most enjoyable. The game is centered on the perspective of a dog whose found 
+themselves in a medieval plane of existence with creatures and monsters. In the 
+treacherous unforgiving lands players can interact with objects in their surroundings, 
+battle enemies, and attempt to beat the game by escaping the area.<br/>
+TO RUN THE GAME<br/>
+Move the minimap.jpg into the default source folder. In eclipse this is the folder
+that contains the folder "src" in it. 
 
 
